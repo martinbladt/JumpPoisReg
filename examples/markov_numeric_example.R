@@ -12,20 +12,6 @@ plot_dir <- file.path(example_dir, "figures")
 dir.create(plot_dir, showWarnings = FALSE, recursive = TRUE)
 plot_file <- function(name) file.path(plot_dir, name)
 
-fill_missing_step <- function(x) {
-  if (all(is.na(x))) {
-    return(rep(0, length(x)))
-  }
-  first_ok <- which(!is.na(x))[1]
-  x[seq_len(first_ok)] <- x[first_ok]
-  for (i in seq_len(length(x))[-1]) {
-    if (is.na(x[i])) {
-      x[i] <- x[i - 1]
-    }
-  }
-  x
-}
-
 mu_12 <- function(t) 0.09 + 0.0018 * t + 0.045 * sin(t / 2)
 mu_13 <- function(t) 0.01 + 0.0002 * t + 0.005 * sin(t / 2)
 mu_23 <- function(t) 0.06 + 0.0020 * t + 0.050 * sin(t / 2)
@@ -43,7 +29,6 @@ true_rate <- function(tr, t) {
 plot_markov_transition <- function(tr, fit, grid) {
   d <- fit$rates[fit$rates$transition == tr, c("interval", "rate")]
   d <- d[order(d$interval), ]
-  d$rate <- fill_missing_step(d$rate)
 
   x_step <- c(grid[-length(grid)], tail(grid, 1))
   y_step <- c(d$rate, tail(d$rate, 1))
@@ -91,7 +76,7 @@ mark_dist_markov <- function(i, s, v) {
 }
 
 # Increase n to 100000 for chapter-grade Monte Carlo precision.
-n <- 20000
+n <- 100000
 censoring <- runif(n, 10, 40)
 markov_sim <- vector("list", n)
 

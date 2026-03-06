@@ -159,7 +159,7 @@ mark_dist <- function(i, s, v) {
 }
 
 # Increase n to 100000 for chapter-grade Monte Carlo precision.
-n <- 12000
+n <- 100000
 censoring <- runif(n, 10, 40)
 semi_markov_sim <- vector("list", n)
 

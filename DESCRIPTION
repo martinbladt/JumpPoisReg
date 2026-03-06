@@ -1,0 +1,17 @@
+Package: JumpPoisReg
+Type: Package
+Title: Poisson Regression for Markov and Semi-Markov Jump Paths
+Version: 0.1.0
+Authors@R: c(person("Martin", "Bladt", email = "martinbladt@math.ku.dk", role = c("aut", "cre")))
+Author: Martin Bladt [aut, cre]
+Maintainer: Martin Bladt <martinbladt@math.ku.dk>
+Description: Fits piecewise Poisson regression models for transition
+    intensities from observed jump-process paths under Markov and semi-Markov
+    specifications. Includes simulation of jump paths for time-inhomogeneous
+    models.
+License: GPL (>= 2)
+Encoding: UTF-8
+RoxygenNote: 7.3.2
+Imports:
+    stats,
+    utils
